@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>NeoMind AI | Tafakkur · Muammo · Ijodkorlik</title>
+    <title>TAFAKKUR ZALI | Muammo · Ijod · AI</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            user-select: none;
         }
 
         body {
-            background: #050b12;
-            font-family: 'Space Grotesk', 'Inter', 'Segoe UI', system-ui, -apple-system, 'Plus Jakarta Sans', monospace;
             overflow: hidden;
+            font-family: 'Poppins', 'Segoe UI', 'Inter', system-ui, -apple-system, monospace;
+            background: #03050b;
             height: 100vh;
-            color: #eef5ff;
+            width: 100%;
         }
 
-        /* ---------- KANVAS ORQA FONDAGI AI HARAKATLAR ---------- */
-        #bg-canvas {
+        /* ---------- ORQA FON KANVASI (TINIMSIZ ANIMATSIYALAR) ---------- */
+        #bgCanvas {
             position: fixed;
             top: 0;
             left: 0;
@@ -28,370 +29,421 @@
             height: 100%;
             z-index: 0;
             display: block;
-            background: radial-gradient(circle at 30% 20%, #0a1428, #010101);
         }
 
-        /* asosiy kontent - zamonaviy, antiqa detallar bilan */
+        /* Asosiy kontent: glassmorphism + markaz */
         .hero {
             position: relative;
-            z-index: 10;
+            z-index: 20;
             width: 100%;
             height: 100%;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             backdrop-filter: blur(2px);
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
-        /* glassmorphism + antiqa ramka */
-        .card {
-            background: rgba(8, 18, 28, 0.58);
-            backdrop-filter: blur(16px);
-            border-radius: 64px;
-            border: 1px solid rgba(0, 255, 255, 0.25);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(0, 255, 255, 0.1) inset;
-            padding: 3rem 2.5rem;
-            width: 90%;
+        .center-stage {
             max-width: 1300px;
-            transition: all 0.4s;
-            animation: fadeGlow 2s ease-out;
-        }
-
-        @keyframes fadeGlow {
-            0% { opacity: 0; transform: scale(0.96); box-shadow: 0 0 0 rgba(0,255,255,0); }
-            100% { opacity: 1; transform: scale(1); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-        }
-
-        /* typing mavzu */
-        .topic-area {
-            text-align: center;
-            margin-bottom: 3rem;
-            border-bottom: 1px dashed rgba(0, 230, 250, 0.4);
-            padding-bottom: 1.5rem;
-        }
-
-        .pre-title {
-            font-size: 0.85rem;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            background: linear-gradient(135deg, #7df9ff, #5f9eff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
-
-        .typing-wrapper {
-            font-size: clamp(1.8rem, 6vw, 3.4rem);
-            font-weight: 700;
-            display: inline-block;
-            font-family: 'Space Mono', 'Fira Code', monospace;
-        }
-
-        #dynamic-topic {
-            background: linear-gradient(120deg, #ffffff, #a0f0ff, #7aa2ff);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-weight: 800;
-            border-right: 3px solid #0ff;
-            padding-right: 5px;
-            animation: blinkCursor 0.8s infinite;
-        }
-
-        @keyframes blinkCursor {
-            0%, 100% { border-color: #0ff; }
-            50% { border-color: transparent; }
-        }
-
-        /* antiqa / nostalik detallari: statik qora oq plyonka effekti */
-        .static-noise {
-            position: fixed;
-            top: 0;
-            left: 0;
             width: 100%;
-            height: 100%;
-            pointer-events: none;
-            background: repeating-radial-gradient(circle at 20% 30%, rgba(0,0,0,0.2), rgba(255,255,255,0.02) 2px);
-            z-index: 5;
-            opacity: 0.2;
-            mix-blend-mode: overlay;
+            background: rgba(5, 12, 22, 0.55);
+            backdrop-filter: blur(18px);
+            border-radius: 80px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 255, 200, 0.2) inset;
+            padding: 2.8rem 2rem;
+            transition: all 0.4s;
+            animation: floatInMain 1s ease-out;
         }
 
-        /* 5 ta ism uchun modern grid (AI + antiqa) */
-        .names-grid {
+        @keyframes floatInMain {
+            0% { opacity: 0; transform: scale(0.96) translateY(30px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* MAVZU MARKAZI (typing effekt) */
+        .topic-block {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid rgba(0, 230, 250, 0.3);
+            padding-bottom: 1.4rem;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            letter-spacing: 5px;
+            font-weight: 500;
+            color: #8bcbff;
+            text-transform: uppercase;
+            background: rgba(0,0,0,0.5);
+            display: inline-block;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            margin-bottom: 1rem;
+            border: 1px solid cyan;
+        }
+
+        .typing-title {
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            font-weight: 800;
+            font-family: 'Space Mono', 'Fira Code', monospace;
+            background: linear-gradient(135deg, #ffffff, #7df9ff, #ff66cc);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            border-right: 3px solid #0ff;
+            padding-right: 8px;
+            animation: blinkCaret 0.75s infinite;
+        }
+
+        @keyframes blinkCaret {
+            0%,100%{ border-color: #0ff; }
+            50%{ border-color: transparent; }
+        }
+
+        /* 5 ta ism – AVATAR ORNIGA STIKER + AYLANISH (carousel) + O‘ZIGA XOS BELGILAR */
+        .names-carousel {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 1.8rem;
-            margin: 2rem 0 2rem;
+            gap: 2rem;
+            margin: 3rem 0 2rem;
+            perspective: 900px;
         }
 
-        .name-chip {
-            background: rgba(0, 20, 40, 0.65);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(0, 255, 200, 0.5);
-            border-radius: 60px;
-            padding: 0.9rem 2rem;
-            font-size: 1.5rem;
-            font-weight: 600;
-            font-family: 'Space Grotesk', monospace;
-            letter-spacing: 1px;
-            transition: all 0.25s cubic-bezier(0.2, 1.2, 0.4, 1);
-            color: #eef2ff;
-            text-shadow: 0 0 6px rgba(0,230,250,0.5);
-            cursor: default;
+        .avatar-card {
+            background: rgba(0, 15, 25, 0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 48px;
+            width: 180px;
+            padding: 1.2rem 0.8rem;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.2, 1.2, 0.4, 1);
+            border: 1px solid rgba(0, 255, 255, 0.6);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            cursor: pointer;
             transform-style: preserve-3d;
-            box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+            animation: cardFloat 3s infinite alternate;
         }
 
-        .name-chip:hover {
-            transform: translateY(-6px) scale(1.02);
+        /* har bir kartaga individual aylanish & delay */
+        .avatar-card:nth-child(1) { animation-delay: 0s; }
+        .avatar-card:nth-child(2) { animation-delay: 0.3s; }
+        .avatar-card:nth-child(3) { animation-delay: 0.6s; }
+        .avatar-card:nth-child(4) { animation-delay: 0.9s; }
+        .avatar-card:nth-child(5) { animation-delay: 1.2s; }
+
+        @keyframes cardFloat {
+            0% { transform: translateY(0px) rotateY(0deg); }
+            100% { transform: translateY(-12px) rotateY(6deg); }
+        }
+
+        .avatar-card:hover {
+            transform: scale(1.05) translateY(-15px);
             border-color: #ff55cc;
-            box-shadow: 0 0 22px #0ff3, 0 10px 20px black;
-            background: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            text-shadow: 0 0 10px cyan;
+            box-shadow: 0 0 28px cyan, 0 12px 28px black;
+            background: rgba(0, 0, 0, 0.8);
         }
 
-        /* ism maydonlari uchun turli xil animatsiyalar */
-        .name-chip:nth-child(1) { animation: floatName 3s infinite ease-in-out 0s; }
-        .name-chip:nth-child(2) { animation: floatName 3.4s infinite ease-in-out 0.2s; }
-        .name-chip:nth-child(3) { animation: floatName 2.8s infinite ease-in-out 0.4s; }
-        .name-chip:nth-child(4) { animation: floatName 3.2s infinite ease-in-out 0.6s; }
-        .name-chip:nth-child(5) { animation: floatName 3.6s infinite ease-in-out 0.8s; }
-
-        @keyframes floatName {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-            100% { transform: translateY(0px); }
+        /* Stiker / avatar ikon oralig'i */
+        .sticker {
+            font-size: 4rem;
+            margin-bottom: 0.75rem;
+            display: inline-block;
+            filter: drop-shadow(0 0 6px #0ff);
+            transition: 0.2s;
         }
 
-        /* tugma / boshlash elementlari (antiqa + zamonaviy) */
-        .action-area {
+        .name {
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #fff, #aaffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-top: 0.3rem;
+        }
+
+        .trait {
+            font-size: 0.7rem;
+            font-family: monospace;
+            margin-top: 0.5rem;
+            color: #b0f0ff;
+            background: rgba(0,0,0,0.6);
+            display: inline-block;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            border: 0.5px solid cyan;
+        }
+
+        /* tafsilotlar ismlarga mos: */
+        /* Boshlash tugmasi (prezentatsiyani ochadi) */
+        .launch-area {
             display: flex;
             justify-content: center;
             margin-top: 2rem;
         }
 
-        .enter-btn {
-            background: linear-gradient(95deg, #000000aa, #0a1a2eaa);
+        .prez-btn {
+            background: linear-gradient(95deg, #001d2d, #0a1122);
             border: 1.5px solid #0ff;
-            padding: 0.9rem 2.4rem;
+            padding: 0.9rem 2.6rem;
             font-size: 1.2rem;
-            font-weight: 600;
+            font-weight: 700;
             font-family: monospace;
-            letter-spacing: 2px;
-            color: #b5ffff;
+            color: #b4ffff;
             border-radius: 60px;
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
             cursor: pointer;
             transition: 0.2s;
-            box-shadow: 0 0 10px rgba(0,255,255,0.2);
             text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 10px rgba(0,255,255,0.3);
         }
 
-        .enter-btn:hover {
+        .prez-btn:hover {
             background: #0ff22a30;
-            border-color: #ff66cc;
+            border-color: #f66;
             color: white;
-            box-shadow: 0 0 25px #0ff, 0 0 10px #f0f;
+            box-shadow: 0 0 26px #0ff, 0 0 12px #f0f;
             transform: scale(1.02);
-            letter-spacing: 3px;
         }
 
-        /* qo'shimcha orqa fonda AI partikllar uchun canvas joy */
-        .info-note {
+        /* infoline */
+        .credit {
             position: absolute;
-            bottom: 18px;
-            right: 24px;
-            font-size: 11px;
+            bottom: 15px;
+            left: 20px;
+            font-size: 10px;
             opacity: 0.4;
+            z-index: 30;
             font-family: monospace;
-            z-index: 20;
-            background: rgba(0,0,0,0.4);
-            padding: 4px 12px;
+            background: rgba(0,0,0,0.5);
+            padding: 4px 14px;
             border-radius: 20px;
-            backdrop-filter: blur(4px);
-            letter-spacing: 1px;
+            pointer-events: none;
         }
 
-        @media (max-width: 780px) {
-            .card {
-                padding: 1.8rem 1.2rem;
-                border-radius: 32px;
+        @media (max-width: 860px) {
+            .avatar-card {
+                width: 150px;
+                padding: 0.8rem 0.5rem;
             }
-            .name-chip {
-                padding: 0.5rem 1.2rem;
-                font-size: 1rem;
-            }
-            .typing-wrapper {
-                font-size: 1.4rem;
-            }
+            .sticker { font-size: 2.8rem; }
+            .name { font-size: 1rem; }
+            .center-stage { padding: 1.5rem; border-radius: 48px; }
+        }
+        @media (max-width: 680px) {
+            .names-carousel { gap: 0.8rem; }
         }
 
-        /* Glitch effekt antiqa */
-        .glitch-text {
-            position: relative;
+        /* iframe overlay */
+        .presentation-iframe-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1), visibility 0s linear 0.7s;
         }
+
+        .presentation-iframe-layer.active {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .close-iframe-btn {
+            position: absolute;
+            top: 24px;
+            right: 32px;
+            background: #ff3366cc;
+            border: none;
+            font-size: 28px;
+            width: 50px;
+            height: 50px;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            z-index: 1002;
+            font-weight: bold;
+            transition: 0.2s;
+            box-shadow: 0 0 15px black;
+        }
+        .close-iframe-btn:hover { background: #ff0055; transform: scale(1.05);}
     </style>
 </head>
 <body>
 
-    <canvas id="bg-canvas"></canvas>
-    <div class="static-noise"></div>
+    <canvas id="bgCanvas"></canvas>
 
     <div class="hero">
-        <div class="card">
-            <div class="topic-area">
-                <div class="pre-title">✦ NEURO·CREATIVE ✦  INTELLEKT  ✦</div>
-                <div class="typing-wrapper">
-                    <span id="dynamic-topic"></span>
+        <div class="center-stage">
+            <div class="topic-block">
+                <div class="badge">✦ INTELLEKT LAB ⚡ 2025 ✦</div>
+                <div>
+                    <span class="typing-title" id="dynamicTopic"></span>
                 </div>
-                <div style="margin-top: 1rem; font-size: 0.85rem; letter-spacing: 1px; opacity: 0.7; font-family: monospace;">
-                    ⚡ tafakkur | muammoni hal qilish | ijodkorlik ⚡
+                <div style="margin-top: 14px; font-size: 0.75rem; letter-spacing: 2px; font-weight: 300; font-family: monospace;">🧠 tahlil · yechim · yaratuvchanlik</div>
+            </div>
+
+            <!-- 5 ta ism: Stiker va o‘ziga xos xususiyatlar bilan -->
+            <div class="names-carousel" id="namesCarousel">
+                <!-- Rahimberdi - shalpaygan -->
+                <div class="avatar-card" data-name="Rahimberdi">
+                    <div class="sticker">🫠💤</div>
+                    <div class="name">Rahimberdi</div>
+                    <div class="trait">shalpaygan | beparvo daho</div>
+                </div>
+                <!-- Murodjon - achki taqadi -->
+                <div class="avatar-card" data-name="Murodjon">
+                    <div class="sticker">🗝️🔑</div>
+                    <div class="name">Murodjon</div>
+                    <div class="trait">achki taqadi | kalit ustasi</div>
+                </div>
+                <!-- Muhammadali - bo‘yi uzun -->
+                <div class="avatar-card" data-name="Muhammadali">
+                    <div class="sticker">🦒📏</div>
+                    <div class="name">Muhammadali</div>
+                    <div class="trait">bo‘yi uzun | yuksak fikr</div>
+                </div>
+                <!-- Umidjon - programmist -->
+                <div class="avatar-card" data-name="Umidjon">
+                    <div class="sticker">💻⚙️</div>
+                    <div class="name">Umidjon</div>
+                    <div class="trait">programmist | kod sehrgari</div>
+                </div>
+                <!-- Asrorbek - qiltiriq -->
+                <div class="avatar-card" data-name="Asrorbek">
+                    <div class="sticker">🌀🤸</div>
+                    <div class="name">Asrorbek</div>
+                    <div class="trait">qiltiriq | chaqqon aql</div>
                 </div>
             </div>
 
-            <!-- 5 ta ism joy ajratilgan -->
-            <div class="names-grid">
-                <div class="name-chip">SARDOR</div>
-                <div class="name-chip">ELINA</div>
-                <div class="name-chip">BEKZOD</div>
-                <div class="name-chip">ROBBIE</div>
-                <div class="name-chip">LAYLO</div>
-            </div>
-
-            <div class="action-area">
-                <button class="enter-btn" id="launchPresentation">⟁ PREZENTATSIYANI OCHISH ⟁</button>
+            <div class="launch-area">
+                <button class="prez-btn" id="startPresentationBtn">⟁ PREZENTATSIYAGA O‘TISH ⟁</button>
             </div>
         </div>
     </div>
-    <div class="info-note">⚡ AI generative field | antiq·wave | neural drift ⚡</div>
+    <div class="credit">⚡ AI neyro-tolqinlar | Tinimsiz animatsiya | Tafakkur maydoni</div>
 
-    <!-- iframe konteyneri (dastlab yashirin, to'liq ekranga chiqadi) -->
-    <div id="presentationOverlay" style="position: fixed; top:0; left:0; width:100%; height:100%; z-index:1000; background:#000; visibility: hidden; opacity:0; transition: all 0.8s cubic-bezier(0.23,1,0.32,1);">
-        <iframe id="presFrame" style="width:100%; height:100%; border:none;" allowfullscreen allow="clipboard-write; autoplay" src="https://app.presentations.ai/view/wce6AwVb5i"></iframe>
-        <button id="closePresentation" style="position: absolute; top: 20px; right: 30px; background: #ff3366; border: none; color: white; font-size: 28px; width: 48px; height: 48px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(10px); z-index:1002; font-weight: bold; box-shadow: 0 0 20px black;">✕</button>
+    <!-- iframe overlay -->
+    <div id="presentationOverlay" class="presentation-iframe-layer">
+        <button id="closePresentationBtn" class="close-iframe-btn">✕</button>
+        <iframe id="presentationIframe" allow="clipboard-write; autoplay; fullscreen" allowfullscreen src="https://app.presentations.ai/view/wce6AwVb5i"></iframe>
     </div>
 
     <script>
-        (function() {
-            // ---------- ORQA FONDAGI AI HARAKATLAR (advanced canvas + zarralar / oqimlar) ----------
-            const canvas = document.getElementById('bg-canvas');
+        (function(){
+            // -----------------------  ORQA FONDAGI TINIMSIZ ANIMATSIYALAR (AI + partikllar + to‘lqinlar) -----------------------
+            const canvas = document.getElementById('bgCanvas');
             const ctx = canvas.getContext('2d');
-            let width, height;
+            let w, h;
             let particles = [];
-            let wavePoints = [];
+            let time = 0;
+            let mouseX = 0, mouseY = 0;
             
-            // antiqa + futuristik: ranglar sxemasi
-            const COLORS = ['#0ff', '#2ad4ff', '#ff44cc', '#7df9ff', '#3a6ea5', '#b967ff'];
+            const COLORS = ['#0ff', '#2effb0', '#ff44aa', '#3c9eff', '#b966ff', '#7df9ff'];
             
-            function resizeCanvas() {
-                width = window.innerWidth;
-                height = window.innerHeight;
-                canvas.width = width;
-                canvas.height = height;
+            function resize() {
+                w = window.innerWidth;
+                h = window.innerHeight;
+                canvas.width = w;
+                canvas.height = h;
                 initParticles();
-                initWave();
             }
             
             function initParticles() {
-                const particleCount = Math.min(140, Math.floor(width * height / 9000));
+                const count = Math.min(180, Math.floor(w * h / 7000));
                 particles = [];
-                for (let i = 0; i < particleCount; i++) {
+                for(let i=0; i<count; i++) {
                     particles.push({
-                        x: Math.random() * width,
-                        y: Math.random() * height,
-                        radius: Math.random() * 3 + 1.2,
-                        vx: (Math.random() - 0.5) * 0.4,
-                        vy: (Math.random() - 0.5) * 0.2 + (Math.random() > 0.7 ? 0.1 : -0.1),
-                        alpha: Math.random() * 0.6 + 0.2,
+                        x: Math.random() * w,
+                        y: Math.random() * h,
+                        rad: Math.random() * 3.5 + 1,
+                        vx: (Math.random() - 0.5) * 0.6,
+                        vy: (Math.random() - 0.5) * 0.4 + (Math.random()>0.6?0.2:-0.1),
+                        alpha: Math.random() * 0.7 + 0.2,
                         color: COLORS[Math.floor(Math.random() * COLORS.length)],
-                        pulse: Math.random() * Math.PI * 2,
+                        phase: Math.random() * Math.PI * 2
                     });
                 }
             }
             
-            function initWave() {
-                wavePoints = [];
-                for (let i = 0; i <= 100; i++) {
-                    wavePoints.push({
-                        x: (i / 100) * width,
-                        y: height * 0.7 + Math.sin(i * 0.2) * 30,
-                        baseY: height * 0.7,
-                        speed: 0.02,
-                        amp: 25
-                    });
+            // dinamik chiziqli to‘r + ajdaho nafasi
+            function drawNeuralMesh() {
+                if(!ctx) return;
+                const step = 55;
+                ctx.beginPath();
+                ctx.strokeStyle = `rgba(0, 210, 255, ${0.1 + Math.sin(time)*0.04})`;
+                ctx.lineWidth = 1.2;
+                for(let x = 0; x < w; x += step) {
+                    ctx.moveTo(x, 0);
+                    let offsetY = Math.sin(time * 0.8 + x * 0.008) * 15;
+                    ctx.lineTo(x + Math.sin(time)*4, h + offsetY);
+                    ctx.stroke();
+                }
+                for(let y = 0; y < h; y += step) {
+                    ctx.moveTo(0, y);
+                    let offsetX = Math.cos(time * 0.7 + y * 0.01) * 12;
+                    ctx.lineTo(w + offsetX, y + Math.sin(time * 0.5) * 8);
+                    ctx.stroke();
                 }
             }
             
-            let time = 0;
-            let mouseX = width/2, mouseY = height/2;
-            window.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-            });
-            
-            function drawWave() {
-                if(!wavePoints.length) return;
-                ctx.beginPath();
-                let first = true;
-                for (let i = 0; i < wavePoints.length; i++) {
-                    const pt = wavePoints[i];
-                    const newY = pt.baseY + Math.sin(time * 1.8 + i * 0.07) * pt.amp + Math.cos(time * 1.2 + i * 0.03) * 12;
-                    const influenceX = mouseX / width;
-                    const sway = Math.sin(time * 2 + i * 0.2) * 6 * influenceX;
-                    const drawX = pt.x + sway * 0.5;
-                    if(first) {
-                        ctx.moveTo(drawX, newY);
-                        first = false;
-                    } else {
-                        ctx.lineTo(drawX, newY);
-                    }
+            function drawFlowField() {
+                // suyuq gradient harakat
+                let grad = ctx.createLinearGradient(Math.sin(time)*80, Math.cos(time*0.6)*50, w-Math.sin(time*0.9)*70, h);
+                grad.addColorStop(0, 'rgba(0, 20, 45, 0.2)');
+                grad.addColorStop(0.6, 'rgba(10, 5, 30, 0.4)');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, w, h);
+                
+                // yorug‘lik nuqtalari (AI chiroqlari)
+                for(let i=0;i<30;i++) {
+                    let fx = (Math.sin(time*1.2 + i)*0.5 + 0.5)*w;
+                    let fy = (Math.cos(time*0.9 + i*2.1)*0.4 + 0.6)*h;
+                    ctx.beginPath();
+                    ctx.arc(fx, fy, 4 + Math.sin(time*5+i)*2, 0, Math.PI*2);
+                    ctx.fillStyle = `rgba(100, 200, 255, ${0.2 + Math.sin(time+ i)*0.1})`;
+                    ctx.fill();
+                    ctx.shadowBlur = 12;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
                 }
-                ctx.strokeStyle = 'rgba(0, 210, 255, 0.35)';
-                ctx.lineWidth = 2.5;
-                ctx.stroke();
-                // ikkinchi to‘lqin qizg‘ish
-                ctx.beginPath();
-                first = true;
-                for (let i = 0; i < wavePoints.length; i++) {
-                    const pt = wavePoints[i];
-                    const newY = pt.baseY - 20 + Math.sin(time * 2.2 + i * 0.1) * 18;
-                    const drawX = pt.x + Math.sin(time * 1.5 + i) * 5;
-                    if(first) {
-                        ctx.moveTo(drawX, newY);
-                        first = false;
-                    } else {
-                        ctx.lineTo(drawX, newY);
-                    }
-                }
-                ctx.strokeStyle = 'rgba(255, 80, 180, 0.25)';
-                ctx.lineWidth = 1.8;
-                ctx.stroke();
             }
             
-            function drawParticles() {
-                for (let p of particles) {
+            function drawParticlesModern() {
+                for(let p of particles) {
                     p.x += p.vx;
                     p.y += p.vy;
-                    if (p.x < -20) p.x = width + 20;
-                    if (p.x > width + 20) p.x = -20;
-                    if (p.y < -20) p.y = height + 20;
-                    if (p.y > height + 20) p.y = -20;
+                    if(p.x < -30) p.x = w+20;
+                    if(p.x > w+30) p.x = -30;
+                    if(p.y < -30) p.y = h+20;
+                    if(p.y > h+30) p.y = -30;
                     
-                    // AI-trail effekti: pulsatsiya
-                    const pulseVal = 0.5 + Math.sin(time * 3 + p.pulse) * 0.3;
+                    // pulsatsiya
+                    const glow = 0.6 + Math.sin(time * 4 + p.phase) * 0.3;
                     ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.radius * (0.7 + pulseVal * 0.6), 0, Math.PI * 2);
+                    ctx.arc(p.x, p.y, p.rad * (0.7 + glow*0.4), 0, Math.PI*2);
                     ctx.fillStyle = p.color + Math.floor(p.alpha * 100).toString(16).padStart(2,'0');
                     ctx.fill();
-                    // glow
                     ctx.shadowBlur = 6;
                     ctx.shadowColor = p.color;
                     ctx.fill();
@@ -399,169 +451,188 @@
                 }
             }
             
-            function drawNeuralGrid() {
-                const step = 50;
+            function drawWavingLines() {
+                // bezier to‘lqinlar
+                for(let i=0;i<3;i++) {
+                    ctx.beginPath();
+                    let offset = i * 80;
+                    for(let x=0; x<=w; x+=25) {
+                        let y = h*0.5 + Math.sin(x*0.008 + time*1.8 + offset)*45 + Math.cos(x*0.02 + time)*18;
+                        if(x===0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                    ctx.strokeStyle = `rgba(0, 230, 200, ${0.18 + Math.sin(time+i)*0.05})`;
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                }
+                
+                // ikkinchi qatlam qizg'ish
                 ctx.beginPath();
-                ctx.strokeStyle = 'rgba(0, 180, 200, 0.12)';
-                ctx.lineWidth = 0.8;
-                for (let x = 0; x < width; x += step) {
-                    ctx.moveTo(x, 0);
-                    ctx.lineTo(x + Math.sin(time * 0.5) * 4, height);
-                    ctx.stroke();
+                for(let x=0; x<=w; x+=28) {
+                    let y2 = h*0.65 + Math.sin(x*0.012 + time*2.2)*55 + Math.cos(x*0.015 + time*1.2)*15;
+                    if(x===0) ctx.moveTo(x, y2);
+                    else ctx.lineTo(x, y2);
                 }
-                for (let y = 0; y < height; y += step) {
-                    ctx.moveTo(0, y);
-                    ctx.lineTo(width, y + Math.cos(time * 0.7) * 4);
-                    ctx.stroke();
-                }
-                // radial gradient
-                let grad = ctx.createRadialGradient(mouseX, mouseY, 10, mouseX, mouseY, 200);
-                grad.addColorStop(0, 'rgba(0,255,255,0.05)');
-                grad.addColorStop(1, 'rgba(0,0,0,0)');
-                ctx.fillStyle = grad;
-                ctx.fillRect(0, 0, width, height);
+                ctx.strokeStyle = 'rgba(255, 80, 160, 0.2)';
+                ctx.lineWidth = 1.8;
+                ctx.stroke();
             }
             
             function animateBackground() {
-                if (!ctx) return;
-                ctx.clearRect(0, 0, width, height);
-                ctx.globalCompositeOperation = 'source-over';
-                // fon qorong'i
-                ctx.fillStyle = '#03060c';
-                ctx.fillRect(0, 0, width, height);
+                if(!ctx) return;
+                ctx.clearRect(0, 0, w, h);
+                ctx.fillStyle = '#01040c';
+                ctx.fillRect(0, 0, w, h);
                 
-                // AI-grid
-                drawNeuralGrid();
-                // oqim chiziqlari
-                drawWave();
-                // partikllar
-                drawParticles();
+                drawNeuralMesh();
+                drawFlowField();
+                drawWavingLines();
+                drawParticlesModern();
                 
-                // qo'shimcha yorug'lik nuqtalari (AI effekt)
-                for(let i = 0; i < 40; i++) {
-                    let sx = (Math.sin(time * 0.7 + i) * 0.5 + 0.5) * width;
-                    let sy = (Math.cos(time * 0.5 + i * 2) * 0.4 + 0.6) * height;
-                    ctx.beginPath();
-                    ctx.arc(sx, sy, 2, 0, Math.PI*2);
-                    ctx.fillStyle = `rgba(100, 200, 255, ${0.2 + Math.sin(time + i)*0.1})`;
-                    ctx.fill();
+                // qo‘shimcha "AI glare" effektlari
+                for(let s=0; s<8; s++) {
+                    let angle = time * 0.5 + s;
+                    let radX = w/2 + Math.sin(angle)*100;
+                    let radY = h/2 + Math.cos(angle*0.7)*70;
+                    let gradRad = ctx.createRadialGradient(radX, radY, 5, radX+20, radY+15, 80);
+                    gradRad.addColorStop(0, 'rgba(0,200,250,0.08)');
+                    gradRad.addColorStop(1, 'transparent');
+                    ctx.fillStyle = gradRad;
+                    ctx.fillRect(0,0,w,h);
                 }
                 
-                time += 0.018;
+                time += 0.022;
                 requestAnimationFrame(animateBackground);
             }
             
-            window.addEventListener('resize', () => {
-                resizeCanvas();
-            });
-            resizeCanvas();
+            window.addEventListener('resize', ()=> { resize(); });
+            window.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+            resize();
             animateBackground();
             
-            // ----- TYPING ANIMATION (mavzu) -----
-            const topicPhrases = [
+            // ----------------------- TYPING MAVZU (markazda) -----------------------
+            const topicWords = [
                 "Tafakkur, muammoni hal qilish va ijodkorlik",
-                "Critical Thinking & Problem Solving",
-                "Ijodiy intellekt | Creative AI",
-                "Tafakkur asri | muammo → yechim",
-                "Tafakkur · muammo · ijod"
+                "Tafakkur · muammo · yechim · ijod",
+                "Critical Thinking & Creative Intelligence",
+                "Tafakkur asri: muammodan kashfiyot sari",
+                "Tafakkur, muammo va ijodkorlik uyg'unligi"
             ];
-            let phraseIndex = 0;
-            let charIndex = 0;
-            let isDeleting = false;
-            const typedTextSpan = document.getElementById('dynamic-topic');
+            let idx = 0, charPos = 0, isDeletingFlag = false;
+            const topicSpan = document.getElementById('dynamicTopic');
             
-            function typeEffect() {
-                const currentPhrase = topicPhrases[phraseIndex];
-                if (isDeleting) {
-                    typedTextSpan.innerText = currentPhrase.substring(0, charIndex - 1);
-                    charIndex--;
-                    if (charIndex === 0) {
-                        isDeleting = false;
-                        phraseIndex = (phraseIndex + 1) % topicPhrases.length;
+            function typeWriter() {
+                const full = topicWords[idx];
+                if(isDeletingFlag) {
+                    topicSpan.innerText = full.substring(0, charPos-1);
+                    charPos--;
+                    if(charPos === 0) {
+                        isDeletingFlag = false;
+                        idx = (idx+1) % topicWords.length;
                     }
                 } else {
-                    typedTextSpan.innerText = currentPhrase.substring(0, charIndex + 1);
-                    charIndex++;
-                    if (charIndex === currentPhrase.length) {
-                        isDeleting = true;
-                        setTimeout(() => {}, 1500);
+                    topicSpan.innerText = full.substring(0, charPos+1);
+                    charPos++;
+                    if(charPos === full.length) {
+                        isDeletingFlag = true;
+                        setTimeout(()=> {}, 1300);
                     }
                 }
-                let speed = isDeleting ? 40 : 80;
-                if (!isDeleting && charIndex === currentPhrase.length) speed = 1800;
-                else if (isDeleting) speed = 35;
-                setTimeout(typeEffect, speed);
+                let speed = isDeletingFlag ? 35 : 65;
+                if(!isDeletingFlag && charPos === full.length) speed = 1800;
+                setTimeout(typeWriter, speed);
             }
-            typeEffect();
+            typeWriter();
             
-            // ----- PREZENTATSIYA OCHISH (iframe to'liq ekran) -----
-            const overlay = document.getElementById('presentationOverlay');
-            const closeBtn = document.getElementById('closePresentation');
-            const launchBtn = document.getElementById('launchPresentation');
-            const iframeElement = document.getElementById('presFrame');
+            // ----------------------- ISMLAR AYLANISHI (carousel + qo'shimcha aylantirish effekti) -----------------------
+            // ismlar aylanishi : ularni har 4 sekundda bir oz tartibini o'zgartirish / aylantirish (rotatsiya)
+            const carouselDiv = document.getElementById('namesCarousel');
+            let cardsArray = Array.from(document.querySelectorAll('.avatar-card'));
             
-            function openFullPresentation() {
-                // agar allaqachon ko'rinadigan bo'lsa qayta ochmaymiz
-                if (overlay.style.visibility === 'visible') return;
-                overlay.style.visibility = 'visible';
-                overlay.style.opacity = '1';
-                // iframe src ni yangilash (agar xohlasa, xuddi shu)
-                if (iframeElement.src !== 'https://app.presentations.ai/view/wce6AwVb5i') {
-                    iframeElement.src = 'https://app.presentations.ai/view/wce6AwVb5i';
+            function rotateNames() {
+                // ismlar aylanishi: birinchi kartani oxiriga olib borish orqali carousel effekti
+                if(cardsArray.length > 1) {
+                    const firstCard = cardsArray[0];
+                    carouselDiv.removeChild(firstCard);
+                    carouselDiv.appendChild(firstCard);
+                    cardsArray = Array.from(document.querySelectorAll('.avatar-card'));
+                    // qisqa animatsiya
+                    cardsArray.forEach((card, i) => {
+                        card.style.animation = 'none';
+                        setTimeout(() => {
+                            card.style.animation = `cardFloat 3s infinite alternate`;
+                            card.style.animationDelay = `${i * 0.2}s`;
+                        }, 10);
+                    });
                 }
-                document.body.style.overflow = 'hidden';
             }
+            // ismlar aylanishini 6 sekundda bir marta bajaramiz (uzoq vaqt davomida ochiq turadi)
+            setInterval(rotateNames, 6000);
             
-            function closePresentation() {
-                overlay.style.opacity = '0';
-                overlay.style.visibility = 'hidden';
-                document.body.style.overflow = '';
-                // ichki iframe to'xtatilmaydi, lekin foydalanuvchi qayta ochganda ishlaydi
-            }
-            
-            launchBtn.addEventListener('click', openFullPresentation);
-            closeBtn.addEventListener('click', closePresentation);
-            
-            // Esc tugmasini bosganda yopish
-            window.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && overlay.style.visibility === 'visible') {
-                    closePresentation();
-                }
-                // Agar boshlash tugmasiga Enter bo'lsa ham ishlatish mumkin (ixtiyoriy)
-                if (e.key === 'Enter' && launchBtn === document.activeElement) {
-                    openFullPresentation();
-                }
-            });
-            
-            // canvas ustida to'liq interaktivlik
-            // chiroyli hover effekt uchun ism maydonlariga ixtiyoriy tooltips
-            const chips = document.querySelectorAll('.name-chip');
-            chips.forEach((chip, idx) => {
-                chip.setAttribute('data-tooltip', `🎓 ijodkor ishtirokchi ${idx+1}`);
-                chip.style.cursor = 'pointer';
-                chip.addEventListener('click', () => {
-                    // kichik haptik: alert emas, balki konsol effekti yoki hech narsa (shunchaki dizayn)
-                    console.log(`Ism tanlandi: ${chip.innerText} — tafakkur markazi`);
+            // har bir ismga alohida stiker + trait allaqachon mavjud. Rahimberdi shalpaygan, Murodjon achki, vs.
+            // qo'shimcha ravishda hoverda tooltip
+            const avatarCards = document.querySelectorAll('.avatar-card');
+            avatarCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const ism = card.querySelector('.name')?.innerText;
+                    if(ism) console.log(`${ism} — tafakkur markazida`);
                 });
             });
             
-            // qo'shimcha antiqa + zamonaviy: vaqti-vaqti bilan canvasda o'zgaruvchi glitch
-            setInterval(() => {
-                if (Math.random() > 0.85 && overlay.style.visibility !== 'visible') {
-                    const glitchCanvas = document.createElement('div');
-                    glitchCanvas.style.position = 'fixed';
-                    glitchCanvas.style.top = 0;
-                    glitchCanvas.style.left = 0;
-                    glitchCanvas.style.width = '100%';
-                    glitchCanvas.style.height = '100%';
-                    glitchCanvas.style.background = 'rgba(255,0,100,0.03)';
-                    glitchCanvas.style.pointerEvents = 'none';
-                    glitchCanvas.style.zIndex = '15';
-                    glitchCanvas.style.mixBlendMode = 'screen';
-                    document.body.appendChild(glitchCanvas);
-                    setTimeout(() => glitchCanvas.remove(), 80);
+            // ----------------------- PREZENTATSIYA OCHISH (iframe to'liq) -----------------------
+            const overlayDiv = document.getElementById('presentationOverlay');
+            const openBtn = document.getElementById('startPresentationBtn');
+            const closePresBtn = document.getElementById('closePresentationBtn');
+            const iframePres = document.getElementById('presentationIframe');
+            
+            function openFullPresentation() {
+                if(overlayDiv.classList.contains('active')) return;
+                overlayDiv.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                // iframe src allaqachon mavjud, reload bo'lmasligi uchun check
+                if(!iframePres.src.includes('app.presentations.ai')) {
+                    iframePres.src = 'https://app.presentations.ai/view/wce6AwVb5i';
                 }
-            }, 3800);
+            }
+            
+            function closePresentation() {
+                overlayDiv.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            
+            openBtn.addEventListener('click', openFullPresentation);
+            closePresBtn.addEventListener('click', closePresentation);
+            window.addEventListener('keydown', (e) => {
+                if(e.key === 'Escape' && overlayDiv.classList.contains('active')) {
+                    closePresentation();
+                }
+            });
+            
+            // ekran uzoq vaqt ochiq turadi va orqada fon ishlaydi!
+            // qo'shimcha "antiqa" glitch effekti vaqti-vaqti bilan
+            setInterval(() => {
+                if(Math.random() > 0.82 && !overlayDiv.classList.contains('active')) {
+                    const glitchDiv = document.createElement('div');
+                    glitchDiv.style.position = 'fixed';
+                    glitchDiv.style.top = 0;
+                    glitchDiv.style.left = 0;
+                    glitchDiv.style.width = '100%';
+                    glitchDiv.style.height = '100%';
+                    glitchDiv.style.background = 'rgba(0, 255, 200, 0.03)';
+                    glitchDiv.style.pointerEvents = 'none';
+                    glitchDiv.style.zIndex = '25';
+                    glitchDiv.style.mixBlendMode = 'screen';
+                    document.body.appendChild(glitchDiv);
+                    setTimeout(() => glitchDiv.remove(), 120);
+                }
+            }, 3400);
+            
+            // Avatarlarning aylanish effekti yanada jonli: stikerlarga micro-pulse
+            setInterval(() => {
+                document.querySelectorAll('.sticker').forEach(st => {
+                    st.style.transform = `scale(${1 + Math.sin(Date.now() * 0.008) * 0.05})`;
+                });
+            }, 150);
         })();
     </script>
 </body>
